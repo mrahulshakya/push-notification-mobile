@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "753358123391",
+    "firebase_url": "https://notif-304b5.firebaseio.com",
+    "project_id": "notif-304b5",
+    "storage_bucket": "notif-304b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753358123391:android:ae933a0a7cf589de",
+        "android_client_info": {
+          "package_name": "com.rahul.pushsample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753358123391-kv7t9oqm8b39f2gbacdn6aoeu52ivs04.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_8o4CIaig1GrOKh1NqZIOieTu0HSNWt0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
