@@ -150,7 +150,16 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.1</Version>
     </PackageReference>
+    <PackageReference Include="RestSharp">
+      <Version>106.6.9</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PushNotification.Client\PushNotification.Client.csproj">
+      <Project>{8CF876F9-587E-4025-9F09-B5E80F02DDB7}</Project>
+      <Name>PushNotification.Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\PushNotification.Mobile\PushNotification.Mobile.projitems" Label="Shared" />

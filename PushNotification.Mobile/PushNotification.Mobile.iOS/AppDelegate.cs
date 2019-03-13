@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+using System.Threading.Tasks;
 using Foundation;
+using PushNotification.PushClient;
+using RestSharp;
 using UIKit;
 
 namespace PushNotification.Mobile.iOS
@@ -24,8 +24,61 @@ namespace PushNotification.Mobile.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+           
+            // Register for push notifications.
+            var settings = UIUserNotificationSettings.GetSettingsForTypes(
+                UIUserNotificationType.Alert
+                | UIUserNotificationType.Badge
+                | UIUserNotificationType.Sound,
+                new NSSet());
+
+            UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+            UIApplication.SharedApplication.RegisterForRemoteNotifications();
 
             return base.FinishedLaunching(app, options);
+
+        }
+
+        public override void RegisteredForRemoteNotifications(UIApplication application,
+    NSData token)
+        {
+            //Note that the device type should be 1 in case of IOS devices.
+            var deviceToken = token.Description.Replace("<", "").Replace(">", "").Replace(" ", "");
+            if (!string.IsNullOrEmpty(deviceToken))
+            {
+
+                var client = new PushNotificationClient();
+                var jwtToken = "user1";
+                var request = new RegisterDeviceRequest
+                {
+                    DeviceInfo = new DeviceInfo
+                    {
+                        DeviceToken = deviceToken,
+                        DeviceType = DeviceType.Android,
+                        UserId = Guid.NewGuid().ToString() // Replace this with the logged in user id.
+                    }
+                };
+
+                Task.Run(async () => await client.RegiterDevice(jwtToken, request));
+            }
+
+        }
+
+        public override void DidReceiveRemoteNotification(UIApplication application,
+    NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
+        {
+            NSDictionary aps = userInfo.ObjectForKey(new NSString("aps")) as NSDictionary;
+
+            string alert = string.Empty;
+            if (aps.ContainsKey(new NSString("alert")))
+                alert = (aps[new NSString("alert")] as NSString).ToString();
+
+            //show alert
+            if (!string.IsNullOrEmpty(alert))
+            {
+                UIAlertView avAlert = new UIAlertView("Notification", alert, null, "OK", null);
+                avAlert.Show();
+            }
         }
     }
 }

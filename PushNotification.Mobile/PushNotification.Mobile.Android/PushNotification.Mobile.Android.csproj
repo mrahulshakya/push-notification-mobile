@@ -119,6 +119,12 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_stat_ic_notification.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PushNotification.Client\PushNotification.Client.csproj">
+      <Project>{8cf876f9-587e-4025-9f09-b5e80f02ddb7}</Project>
+      <Name>PushNotification.Client</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\PushNotification.Mobile\PushNotification.Mobile.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

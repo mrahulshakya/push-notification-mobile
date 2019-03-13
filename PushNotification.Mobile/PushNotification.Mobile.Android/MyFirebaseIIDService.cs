@@ -1,12 +1,9 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Util;
 using Firebase.Iid;
-using RestSharp;
+using PushNotification.PushClient;
+using System;
+using System.Threading.Tasks;
 
 namespace PushNotification.Mobile.Droid
 {
@@ -26,32 +23,21 @@ namespace PushNotification.Mobile.Droid
         {
             var refreshedToken = FirebaseInstanceId.Instance.Token;
             Log.Debug(TAG, "Refreshed token: " + refreshedToken);
-            Task.Run(async () => await SendRegistrationToServer(refreshedToken));
-        }
-        async Task SendRegistrationToServer(string tokenString)
-        {       
-                // Send the jwtToken here.
-                var authToken = "user1";
-                var client = new RestClient(apiUrl);
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("cache-control", "no-cache");
-                request.AddHeader("Authorization", "user1");
-                request.AddHeader("Content-Type", "application/json");
-                var token = new
+
+            var client = new PushNotificationClient();
+            var jwtToken = "user1";
+            var request = new RegisterDeviceRequest
+            {
+                DeviceInfo = new DeviceInfo
                 {
-                    deviceInfo = new
-                    {
-                        // Idealy user id should be the logged in user.
-                        userId = Guid.NewGuid().ToString(),
-                        deviceToken = tokenString,
-                        deviceType = "2"
-                    }
-                };
+                    DeviceToken = refreshedToken,
+                    DeviceType = DeviceType.Android,
+                    UserId = Guid.NewGuid().ToString() // Replace this with the logged in user id.
+                }
+            };
 
-                var body = Newtonsoft.Json.JsonConvert.SerializeObject(token);
-
-                request.AddParameter("undefined", body, ParameterType.RequestBody);
-               var response =  await client.ExecuteTaskAsync(request);
+            Task.Run(async () => await client.RegiterDevice(jwtToken,  request));
         }
+       
     }
 }
