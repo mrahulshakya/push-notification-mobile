@@ -5,10 +5,9 @@ Note that the url will be like {baseUrl}/Api/
 
 ##### **Setup Android**
 - **Install the following nuget packages**
->  Xamarin.Firebase.Messaging
-    Xamarin.GooglePlayServices.Base
-    Xamarin.GooglePlayServices.Basement 
-	>
+ Xamarin.Firebase.Messaging
+ Xamarin.GooglePlayServices.Base
+ Xamarin.GooglePlayServices.Basement
 
 - ***Register app in FCM and copy the google-services.json. Set build action to  'GoogleServicesJson'***
 
@@ -66,12 +65,12 @@ Note that the url will be like {baseUrl}/Api/
         }
     }
 ```
-	* For old Users* : Once the user logs. Check the take the token from "FirebaseInstanceId.Instance.Token" 
+	**For old Users** : Once the user logs. Check the take the token from "FirebaseInstanceId.Instance.Token" 
 	call the get endpoint to check if device token is registered.	
 	If not  registered send the device registration call
 
 
- - ***Implement the FirebaseMessagingService OnMessageRecieved to check if token is recieved *** 
+ - **Implement the FirebaseMessagingService OnMessageRecieved to check if token is recieved **
  ```csharp
  public override void OnMessageReceived(RemoteMessage message)
         {
