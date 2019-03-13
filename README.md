@@ -35,6 +35,7 @@ Note that the url will be like {baseUrl}/Api/
 	</application>
 ```
 - **For new Users : Override the FirebaseInstanceIdService OnTokenRefresh Method and call the registration**
+
 ```csharp
  [Service]
     [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
@@ -67,12 +68,13 @@ Note that the url will be like {baseUrl}/Api/
         }
     }
 ```
-	**For old Users** : Once the user logs. Check the take the token from "FirebaseInstanceId.Instance.Token" 
-	call the get endpoint to check if device token is registered.	
-	If not  registered send the device registration call
+   
+ - **For old Users** : 
+ 	- Once the user logs. Check the take the token from "FirebaseInstanceId.Instance.Token" 
+	- call the get endpoint to check if device token is registered.	
+	- If not  registered send the device registration call
 
-
- - **Implement the FirebaseMessagingService OnMessageRecieved to check if token is recieved **
+ - **Implement the FirebaseMessagingService OnMessageRecieved to check if token is recieved**
  ```csharp
  public override void OnMessageReceived(RemoteMessage message)
         {
