@@ -17,8 +17,6 @@ namespace PushNotification.Mobile.Droid
         const int deviceType = 2;
         const string TAG = "MyFirebaseIIDService";
 
-        // Add your gateway Url.
-        const string apiUrl = @"";
         public override void OnTokenRefresh()
         {
             var refreshedToken = FirebaseInstanceId.Instance.Token;
