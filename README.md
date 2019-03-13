@@ -5,11 +5,13 @@ Note that the url will be like {baseUrl}/Api/
 
 ##### **Setup Android**
 - **Install the following nuget packages**
- Xamarin.Firebase.Messaging
- Xamarin.GooglePlayServices.Base
- Xamarin.GooglePlayServices.Basement
+ 	- Xamarin.Firebase.Messaging
+ 	- Xamarin.GooglePlayServices.Base
+ 	- Xamarin.GooglePlayServices.Basement
+![Screenshot](img/droid/nuget.PNG)
 
 - ***Register app in FCM and copy the google-services.json. Set build action to  'GoogleServicesJson'***
+![Screenshot](img/droid/buidAction.PNG)
 
 - **Give permission in menifest file**
 ```xml
@@ -105,11 +107,16 @@ Note that the url will be like {baseUrl}/Api/
             var notificationManager = NotificationManagerCompat.From(this);
             notificationManager.Notify(MainActivity.NOTIFICATION_ID, notificationBuilder.Build());
         }
-`
+```
+
  #####  **Setup IOS**
-- **Follow instruction from https://docs.microsoft.com/en-us/azure/app-service-mobile/app-service-mobile-xamarin-forms-get-started-push
-  to generate the certificates from APN**
+
+- **Follow intructions from https://docs.microsoft.com/en-us/azure/app-service-mobile/app-service-mobile-xamarin-ios-get-started-push to obtain the device cerificater**
+![Screenshot](img/ios/cert1.PNG)
+
 - **Setup the certificates on visual studio using the above link**
+![Screenshot](img/ios/vssetup.PNG)
+
 - **Implement the AppDelegate and extend the FinishedLaunching method to register devices
 **
 ```csharp
